@@ -15,6 +15,7 @@ class User(UserBase):
 
 class ScoreBase(BaseModel):
     title: str
+    song_key: str
     flute_key: str
     fingering: str
     tags: Optional[List[str]] = None

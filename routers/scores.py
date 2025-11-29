@@ -24,6 +24,7 @@ def get_db():
 @router.post("/", response_model=schemas.Score)
 def create_score(
     title: str = Form(...),
+    song_key: str = Form(...),
     flute_key: str = Form(...),
     fingering: str = Form(...),
     tags: Optional[str] = Form(None), # JSON string or comma separated
@@ -53,6 +54,7 @@ def create_score(
     
     db_score = models.Score(
         title=title,
+        song_key=song_key,
         flute_key=flute_key,
         fingering=fingering,
         image_path=image_path,
