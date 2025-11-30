@@ -39,6 +39,7 @@ class PlaylistCreate(PlaylistBase):
 class Playlist(PlaylistBase):
     id: int
     user_id: int
+    items: List[PlaylistItem] = []
     class Config:
         orm_mode = True
 

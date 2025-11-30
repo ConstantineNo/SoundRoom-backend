@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
-from routers import auth, scores, playlists, recordings
+from routers import auth, scores, playlists, recordings, debug
 from fastapi.staticfiles import StaticFiles
 
 # Create tables
@@ -24,7 +24,8 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 def read_root():
     return {"message": "Welcome to Dizi Practice Platform API"}
 
-app.include_router(auth.router)
-app.include_router(scores.router)
-app.include_router(playlists.router)
-app.include_router(recordings.router)
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(scores.router, prefix="/api/scores", tags=["scores"])
+app.include_router(playlists.router, prefix="/api/playlists", tags=["playlists"])
+app.include_router(recordings.router, prefix="/api/recordings", tags=["recordings"])
+app.include_router(debug.router, prefix="/api/debug", tags=["debug"])
