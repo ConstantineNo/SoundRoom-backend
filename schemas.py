@@ -30,26 +30,6 @@ class Score(ScoreBase):
     class Config:
         orm_mode = True
 
-class PlaylistBase(BaseModel):
-    name: str
-
-class PlaylistCreate(PlaylistBase):
-    pass
-
-class Playlist(PlaylistBase):
-    id: int
-    user_id: int
-    items: List[PlaylistItem] = []
-    class Config:
-        orm_mode = True
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
-
 class PlaylistItemBase(BaseModel):
     score_id: int
     sort_order: int = 0
@@ -61,6 +41,26 @@ class PlaylistItem(PlaylistItemBase):
     id: int
     playlist_id: int
     score: Optional[Score] = None
+    class Config:
+        orm_mode = True
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+class PlaylistBase(BaseModel):
+    name: str
+
+class PlaylistCreate(PlaylistBase):
+    pass
+
+class Playlist(PlaylistBase):
+    id: int
+    user_id: int
+    items: List[PlaylistItem] = []
     class Config:
         orm_mode = True
 
