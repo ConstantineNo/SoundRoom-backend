@@ -5,7 +5,6 @@ from datetime import timedelta
 import models, schemas, utils, database
 
 router = APIRouter(
-    prefix="/auth",
     tags=["auth"],
     responses={404: {"description": "Not found"}},
 )

@@ -2,6 +2,8 @@ __pycache__/
 *.py[cod]
 *.sqlite3
 *.db
+*.jsonl
+*.bak
 .env
 .venv/
 .pytest_cache/
@@ -10,4 +12,5 @@ __pycache__/
 .idea/
 .vscode/
 .python-version
-
+uploads/
+logs/
