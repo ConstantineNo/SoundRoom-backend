@@ -4,7 +4,6 @@ from typing import List
 import models, schemas, database, utils
 
 router = APIRouter(
-    prefix="/playlists",
     tags=["playlists"],
     responses={404: {"description": "Not found"}},
 )

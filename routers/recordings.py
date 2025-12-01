@@ -6,7 +6,6 @@ import models, schemas, database, utils
 from typing import List
 
 router = APIRouter(
-    prefix="/recordings",
     tags=["recordings"],
     responses={404: {"description": "Not found"}},
 )

@@ -5,7 +5,7 @@ import json
 import time
 import os
 
-router = APIRouter()
+router = APIRouter(tags=["debug"])
 
 LOG_FILE = "debug_logs.jsonl"
 

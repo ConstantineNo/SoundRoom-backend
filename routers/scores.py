@@ -7,7 +7,6 @@ import models, schemas, database, utils
 from fastapi.staticfiles import StaticFiles
 
 router = APIRouter(
-    prefix="/scores",
     tags=["scores"],
     responses={404: {"description": "Not found"}},
 )
