@@ -38,5 +38,27 @@ def create_score(
     )
     db.add(db_score)
     db.commit()
+    db.add(db_score)
+    db.commit()
     db.refresh(db_score)
     return db_score
+
+
+def update_score_abc(
+    db: Session,
+    score_id: int,
+    abc_source: str,
+    structured_data: dict
+) -> Score | None:
+    """Update score with ABC content and parsed data."""
+    score = get_score(db, score_id)
+    if not score:
+        return None
+        
+    score.abc_source = abc_source
+    score.structured_data = structured_data
+    
+    db.add(score)
+    db.commit()
+    db.refresh(score)
+    return score

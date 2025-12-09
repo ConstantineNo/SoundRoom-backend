@@ -1,6 +1,6 @@
 """Score model definition."""
 
-from sqlalchemy import Column, Integer, String, JSON
+from sqlalchemy import Column, Integer, String, JSON, Text
 
 from app.core.database import Base
 
@@ -17,3 +17,5 @@ class Score(Base):
     image_path = Column(String(255))
     audio_path = Column(String(255))
     tags = Column(JSON, nullable=True)
+    abc_source = Column(Text, nullable=True)
+    structured_data = Column(JSON, nullable=True)

@@ -1,6 +1,6 @@
 """Score-related Pydantic schemas."""
 
-from typing import List, Optional
+from typing import List, Optional, Dict
 from pydantic import BaseModel
 
 
@@ -18,11 +18,18 @@ class ScoreCreate(ScoreBase):
     pass
 
 
+class ScoreUpdateABC(BaseModel):
+    """Schema for updating ABC content."""
+    abc_content: str
+
+
 class Score(ScoreBase):
     """Schema for score response."""
     id: int
     image_path: str
     audio_path: str
+    abc_source: Optional[str] = None
+    structured_data: Optional[dict] = None
     
     class Config:
         orm_mode = True

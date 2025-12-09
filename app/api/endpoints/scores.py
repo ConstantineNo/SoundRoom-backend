@@ -8,8 +8,9 @@ from sqlalchemy.orm import Session
 
 from app.core.deps import get_db
 from app.core.config import UPLOAD_DIR
-from app.schemas import Score
-from app.crud import get_scores, get_score, create_score
+from app.schemas import Score, ScoreUpdateABC
+from app.crud import get_scores, get_score, create_score, update_score_abc
+from app.services.score_service import parse_abc_to_json
 
 
 router = APIRouter(
@@ -69,3 +70,35 @@ def read_score_endpoint(score_id: int, db: Session = Depends(get_db)):
     if score is None:
         raise HTTPException(status_code=404, detail="Score not found")
     return score
+
+
+@router.put("/{score_id}/abc", response_model=Score)
+def update_score_abc_endpoint(
+    score_id: int,
+    abc_data: ScoreUpdateABC,
+    db: Session = Depends(get_db)
+):
+    """
+    Update a score's ABC content and generate structured JSON.
+    """
+    score = get_score(db, score_id)
+    if not score:
+        raise HTTPException(status_code=404, detail="Score not found")
+    
+    try:
+        # Parse ABC to JSON
+        structured_data = parse_abc_to_json(abc_data.abc_content)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal processing error: {str(e)}")
+        
+    # Update DB
+    updated_score = update_score_abc(
+        db, 
+        score_id, 
+        abc_data.abc_content, 
+        structured_data
+    )
+    
+    return updated_score

@@ -5,3 +5,5 @@ pydantic
 python-multipart
 python-jose[cryptography]
 bcrypt
+
+music21>=8.0.0

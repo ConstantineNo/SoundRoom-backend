@@ -3,6 +3,7 @@
 
 ## 1. 文档管理规则
 
+- 使用中文编写文档
 - 所有开发文档必须存放在 `Development_process/YYYY-MM-DD/`
 - 文档命名规范：`文档名称_YYYYMMDD_HHMM.md`
 - 时间戳格式：`YYYYMMDD_HHMM`（精确到分钟）
