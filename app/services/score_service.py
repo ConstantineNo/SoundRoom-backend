@@ -77,7 +77,7 @@ def parse_abc_to_json(abc_content: str) -> dict:
                      measure_dict["notes"].append({
                         "type": "note",
                         "pitch": elem.nameWithOctave,
-                        "duration": elem.duration.quarterLength
+                        "duration": float(elem.duration.quarterLength)
                     })
             measures_data.append(measure_dict)
     
@@ -92,12 +92,12 @@ def parse_abc_to_json(abc_content: str) -> dict:
                 measure_dict["notes"].append({
                     "type": "note",
                     "pitch": elem.nameWithOctave,
-                    "duration": elem.duration.quarterLength
+                    "duration": float(elem.duration.quarterLength)
                 })
             elif isinstance(elem, note.Rest):
                 measure_dict["notes"].append({
                     "type": "rest",
-                    "duration": elem.duration.quarterLength
+                    "duration": float(elem.duration.quarterLength)
                 })
             elif isinstance(elem, chord.Chord):
                 # For flute (monophonic), likely won't have chords, but handle gracefully
@@ -105,7 +105,7 @@ def parse_abc_to_json(abc_content: str) -> dict:
                 measure_dict["notes"].append({
                     "type": "note", # Treat as single note for simplicity or extend later
                     "pitch": elem.notes[-1].nameWithOctave,
-                    "duration": elem.duration.quarterLength,
+                    "duration": float(elem.duration.quarterLength),
                     "is_chord": True
                 })
         
