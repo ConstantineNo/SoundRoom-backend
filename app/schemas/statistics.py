@@ -57,3 +57,17 @@ class DashboardSummary(BaseModel):
     today_uv: int
     total_users: int
     active_bans: int
+
+class WhitelistIPBase(BaseModel):
+    ip_address: str
+    description: Optional[str] = None
+
+class WhitelistIPCreate(WhitelistIPBase):
+    pass
+
+class WhitelistIP(WhitelistIPBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

@@ -2,8 +2,9 @@ import geoip2.database
 from user_agents import parse
 from sqlalchemy.orm import Session
 from datetime import date, datetime
-from app.core.config import GEOIP_DB_PATH, WHITELIST_IPS
+from app.core.config import GEOIP_DB_PATH
 from app.models.statistics import VisitorLog, DailyStats
+from app.services.security_service import SecurityService
 
 class StatsService:
     _geoip_reader = None
@@ -54,7 +55,7 @@ class StatsService:
     @classmethod
     def record_visit(cls, db: Session, request_info: dict):
         ip = request_info.get("ip")
-        if ip in WHITELIST_IPS:
+        if SecurityService.is_whitelisted(db, ip):
             return
 
         # 1. Resolve Info

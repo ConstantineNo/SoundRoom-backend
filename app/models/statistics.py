@@ -41,3 +41,11 @@ class BannedIP(Base):
     banned_at = Column(DateTime, default=datetime.utcnow)
     expires_at = Column(DateTime, nullable=True)  # Null = 永久封禁
     is_active = Column(Boolean, default=True)  # 手动解封可设为 False
+
+class WhitelistIP(Base):
+    __tablename__ = "whitelist_ips"
+
+    id = Column(Integer, primary_key=True, index=True)
+    ip_address = Column(String(45), unique=True, index=True)
+    description = Column(String(255), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)

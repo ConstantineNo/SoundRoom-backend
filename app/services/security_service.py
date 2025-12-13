@@ -7,38 +7,57 @@ from app.core.config import (
     WHITELIST_IPS, SENSITIVE_PATHS, 
     RATE_LIMIT_THRESHOLD_PER_SECOND, RATE_LIMIT_THRESHOLD_PER_MINUTE
 )
-from app.models.statistics import BannedIP
+from app.models.statistics import BannedIP, WhitelistIP
 
 class SecurityService:
     # In-memory storage
     _request_timestamps = defaultdict(deque) # {ip: deque([timestamp, ...])}
     _sensitive_path_hits = defaultdict(int)  # {ip: count}
     _banned_ips_cache = set()
+    _whitelist_ips_cache = set()
     _last_cache_update = 0
+
+    @classmethod
+    def is_whitelisted(cls, db: Session, ip: str) -> bool:
+        # Check config whitelist first
+        if ip in WHITELIST_IPS:
+            return True
+            
+        # Refresh cache if needed (shared refresh logic)
+        if time.time() - cls._last_cache_update > 60:
+            cls._refresh_caches(db)
+            
+        return ip in cls._whitelist_ips_cache
 
     @classmethod
     def is_banned(cls, db: Session, ip: str) -> bool:
         # Refresh cache every minute
         if time.time() - cls._last_cache_update > 60:
-            cls._refresh_banned_cache(db)
+            cls._refresh_caches(db)
         
         return ip in cls._banned_ips_cache
 
     @classmethod
-    def _refresh_banned_cache(cls, db: Session):
+    def _refresh_caches(cls, db: Session):
         try:
+            # Refresh Bans
             active_bans = db.query(BannedIP.ip_address).filter(
                 BannedIP.is_active == True,
                 (BannedIP.expires_at == None) | (BannedIP.expires_at > datetime.utcnow())
             ).all()
             cls._banned_ips_cache = {b.ip_address for b in active_bans}
+            
+            # Refresh Whitelist
+            whitelisted = db.query(WhitelistIP.ip_address).all()
+            cls._whitelist_ips_cache = {w.ip_address for w in whitelisted}
+            
             cls._last_cache_update = time.time()
         except Exception as e:
-            print(f"Error refreshing ban cache: {e}")
+            print(f"Error refreshing security caches: {e}")
 
     @classmethod
-    def check_rate_limit(cls, ip: str) -> bool:
-        if ip in WHITELIST_IPS:
+    def check_rate_limit(cls, db: Session, ip: str) -> bool:
+        if cls.is_whitelisted(db, ip):
             return True
 
         now = time.time()
@@ -63,7 +82,7 @@ class SecurityService:
 
     @classmethod
     def check_sensitive_path(cls, db: Session, ip: str, path: str) -> bool:
-        if ip in WHITELIST_IPS:
+        if cls.is_whitelisted(db, ip):
             return True
             
         # Check if path ends with any sensitive suffix or contains sensitive keywords
@@ -79,7 +98,7 @@ class SecurityService:
 
     @classmethod
     def ban_ip(cls, db: Session, ip: str, reason: str, duration_minutes: int = None):
-        if ip in WHITELIST_IPS:
+        if cls.is_whitelisted(db, ip):
             return
 
         # 1. Add to Database

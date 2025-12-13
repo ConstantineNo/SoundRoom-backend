@@ -18,7 +18,7 @@ class SecurityMiddleware(BaseHTTPMiddleware):
                 return Response(content="Access Denied", status_code=403)
 
             # 2. Check Rate Limit (In-Memory)
-            if not SecurityService.check_rate_limit(ip):
+            if not SecurityService.check_rate_limit(db, ip):
                 SecurityService.ban_ip(db, ip, reason="Rate Limit Exceeded", duration_minutes=60)
                 return Response(content="Too Many Requests", status_code=429)
 

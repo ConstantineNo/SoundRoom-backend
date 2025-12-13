@@ -210,3 +210,83 @@
   "message": "IP 203.0.113.55 unbanned successfully"
 }
 ```
+
+---
+
+## 7. 获取白名单 IP 列表
+
+查看当前所有白名单 IP 记录。
+
+- **URL**: `/admin/security/whitelist`
+- **Method**: `GET`
+- **Auth**: Required (Admin)
+
+### 响应示例 (200 OK)
+```json
+[
+  {
+    "id": 1,
+    "ip_address": "127.0.0.1",
+    "description": "Localhost",
+    "created_at": "2025-12-13T09:00:00.000000"
+  },
+  {
+    "id": 2,
+    "ip_address": "192.168.1.100",
+    "description": "Office VPN",
+    "created_at": "2025-12-13T10:00:00.000000"
+  }
+]
+```
+
+---
+
+## 8. 添加白名单 IP
+
+管理员手动添加一个 IP 到白名单。
+
+- **URL**: `/admin/security/whitelist`
+- **Method**: `POST`
+- **Auth**: Required (Admin)
+
+### 请求体 (JSON)
+
+```json
+{
+  "ip_address": "203.0.113.66",
+  "description": "监控服务器"
+}
+```
+
+### 响应示例 (200 OK)
+```json
+{
+  "id": 3,
+  "ip_address": "203.0.113.66",
+  "description": "监控服务器",
+  "created_at": "2025-12-13T12:00:00.123456"
+}
+```
+
+---
+
+## 9. 移除白名单 IP
+
+手动移除某个 IP 的白名单状态。
+
+- **URL**: `/admin/security/whitelist/{ip_address}`
+- **Method**: `DELETE`
+- **Auth**: Required (Admin)
+
+### 路径参数 (Path)
+
+| 参数名 | 类型 | 说明 |
+|---|---|---|
+| ip_address | string | 需要移除的 IP 地址 |
+
+### 响应示例 (200 OK)
+```json
+{
+  "message": "IP 203.0.113.66 removed from whitelist"
+}
+```

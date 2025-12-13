@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.core.deps import get_db, get_current_admin
-from app.models.statistics import VisitorLog, DailyStats, BannedIP
+from app.models.statistics import VisitorLog, DailyStats, BannedIP, WhitelistIP
 from app.models.user import User
 from app.schemas import statistics as schemas
 from app.services.security_service import SecurityService
@@ -133,3 +133,53 @@ def unban_ip(
     # If strict iptables sync is needed, we would need a shell command here too.
     
     return {"message": f"IP {ip_address} unbanned successfully"}
+
+@router.get("/security/whitelist", response_model=List[schemas.WhitelistIP])
+def get_whitelist_ips(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    List all whitelisted IPs.
+    """
+    return db.query(WhitelistIP).order_by(WhitelistIP.created_at.desc()).all()
+
+@router.post("/security/whitelist", response_model=schemas.WhitelistIP)
+def add_whitelist_ip(
+    whitelist_data: schemas.WhitelistIPCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Add an IP to the whitelist.
+    """
+    existing = db.query(WhitelistIP).filter(WhitelistIP.ip_address == whitelist_data.ip_address).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="IP already in whitelist")
+        
+    new_whitelist = WhitelistIP(
+        ip_address=whitelist_data.ip_address,
+        description=whitelist_data.description
+    )
+    db.add(new_whitelist)
+    db.commit()
+    db.refresh(new_whitelist)
+    return new_whitelist
+
+@router.delete("/security/whitelist/{ip_address}")
+def remove_whitelist_ip(
+    ip_address: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Remove an IP from the whitelist.
+    """
+    whitelist_record = db.query(WhitelistIP).filter(WhitelistIP.ip_address == ip_address).first()
+    if not whitelist_record:
+        raise HTTPException(status_code=404, detail="IP not found in whitelist")
+    
+    db.delete(whitelist_record)
+    db.commit()
+    
+    return {"message": f"IP {ip_address} removed from whitelist"}
