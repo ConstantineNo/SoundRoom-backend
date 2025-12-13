@@ -54,4 +54,18 @@ async def get_current_user(
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise credentials_exception
+        
     return user
+
+async def get_current_admin(
+    current_user = Depends(get_current_user)
+):
+    """
+    Dependency that validates if the current user is an admin.
+    """
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="The user doesn't have enough privileges"
+        )
+    return current_user

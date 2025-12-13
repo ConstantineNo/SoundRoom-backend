@@ -7,3 +7,5 @@ python-jose[cryptography]
 bcrypt
 
 music21>=8.0.0
+geoip2
+user-agents

@@ -10,13 +10,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.core.database import engine, Base
-from app.api.endpoints import auth, scores, playlists, recordings, debug
-
+from app.api.endpoints import auth, scores, playlists, recordings, debug, admin
+from app.core.middleware import SecurityMiddleware
+from app.models import statistics  # Register statistics models
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Bamboo Flute Practice Platform")
+
+# Security Middleware (Inner layer, wrapped by CORS)
+app.add_middleware(SecurityMiddleware)
 
 # CORS middleware configuration
 app.add_middleware(
@@ -43,3 +47,4 @@ app.include_router(scores.router, prefix="/scores", tags=["scores"])
 app.include_router(playlists.router, prefix="/playlists", tags=["playlists"])
 app.include_router(recordings.router, prefix="/recordings", tags=["recordings"])
 app.include_router(debug.router, prefix="/debug", tags=["debug"])
+app.include_router(admin.router, prefix="/admin", tags=["admin"])

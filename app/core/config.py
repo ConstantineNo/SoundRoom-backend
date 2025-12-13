@@ -14,3 +14,10 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./dizi.db"
 
 # Upload Configuration
 UPLOAD_DIR = "uploads"
+
+# Security & Statistics Configuration
+WHITELIST_IPS = ["127.0.0.1", "localhost", "::1"]
+SENSITIVE_PATHS = [".env", "wp-admin", ".git", ".DS_Store", "phpmyadmin", "config.php"]
+RATE_LIMIT_THRESHOLD_PER_SECOND = 50
+RATE_LIMIT_THRESHOLD_PER_MINUTE = 60
+GEOIP_DB_PATH = "app/core/data/GeoLite2-City.mmdb"
