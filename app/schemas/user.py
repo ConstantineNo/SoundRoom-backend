@@ -1,6 +1,8 @@
 """User-related Pydantic schemas."""
 
-from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel, ConfigDict
 
 
 class UserBase(BaseModel):
@@ -17,6 +19,13 @@ class User(UserBase):
     """Schema for user response."""
     id: int
     role: str
-    
-    class Config:
-        orm_mode = True
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class PasswordChange(BaseModel):
+    """Schema for password change."""
+    current_password: str
+    new_password: str

@@ -1,6 +1,8 @@
 """Recording-related Pydantic schemas."""
 
-from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel, ConfigDict
 
 
 class RecordingBase(BaseModel):
@@ -18,6 +20,7 @@ class Recording(RecordingBase):
     id: int
     user_id: int
     file_path: str
-    
-    class Config:
-        orm_mode = True
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = ConfigDict(from_attributes=True)

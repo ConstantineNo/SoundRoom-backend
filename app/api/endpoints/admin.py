@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.core.deps import get_db, get_current_admin
+from app.core.responses import paginated_response
 from app.models.statistics import VisitorLog, DailyStats, BannedIP, WhitelistIP
 from app.models.user import User
 from app.schemas import statistics as schemas
@@ -43,19 +44,19 @@ def get_dashboard_summary(
         "active_bans": active_bans
     }
 
-@router.get("/logs/visitors", response_model=List[schemas.VisitorLog])
+@router.get("/logs/visitors")
 def get_visitor_logs(
     page: int = 1,
     size: int = 20,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_admin)
 ):
-    """
-    Get recent visitor logs.
-    """
+    """Get paginated visitor logs."""
+    query = db.query(VisitorLog).order_by(VisitorLog.created_at.desc())
+    total = query.count()
     skip = (page - 1) * size
-    logs = db.query(VisitorLog).order_by(VisitorLog.created_at.desc()).offset(skip).limit(size).all()
-    return logs
+    logs = query.offset(skip).limit(size).all()
+    return paginated_response(items=logs, page=page, size=size, total=total)
 
 @router.get("/stats/daily", response_model=List[schemas.DailyStats])
 def get_daily_stats(

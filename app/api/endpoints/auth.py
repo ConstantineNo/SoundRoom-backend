@@ -8,8 +8,8 @@ from sqlalchemy.orm import Session
 from app.core.deps import get_db, get_current_user
 from app.core.security import verify_password, create_access_token
 from app.core.config import ACCESS_TOKEN_EXPIRE_MINUTES
-from app.schemas import User, UserCreate, Token
-from app.crud import get_user_by_username, create_user
+from app.schemas import User, UserCreate, Token, PasswordChange
+from app.crud import get_user_by_username, create_user, update_user_password
 from app.models.user import User as UserModel
 
 
@@ -47,7 +47,18 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 
 @router.get("/me", response_model=User)
 def read_users_me(current_user: UserModel = Depends(get_current_user)):
-    """
-    Get current user information.
-    """
+    """Get current user information."""
     return current_user
+
+
+@router.put("/me/password")
+def change_password(
+    pw_data: PasswordChange,
+    db: Session = Depends(get_db),
+    current_user: UserModel = Depends(get_current_user),
+):
+    """Change current user's password."""
+    ok = update_user_password(db, current_user, pw_data.current_password, pw_data.new_password)
+    if not ok:
+        raise HTTPException(status_code=400, detail="Current password is incorrect")
+    return {"message": "Password changed successfully"}

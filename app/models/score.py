@@ -1,6 +1,7 @@
 """Score model definition."""
 
-from sqlalchemy import Column, Integer, String, JSON, Text
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, JSON, Text, DateTime, ForeignKey
 
 from app.core.database import Base
 
@@ -8,7 +9,7 @@ from app.core.database import Base
 class Score(Base):
     """Musical score model."""
     __tablename__ = "scores"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(100))
     song_key = Column(String(10))
@@ -19,3 +20,6 @@ class Score(Base):
     tags = Column(JSON, nullable=True)
     abc_source = Column(Text, nullable=True)
     structured_data = Column(JSON, nullable=True)
+    created_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

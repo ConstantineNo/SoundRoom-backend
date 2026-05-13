@@ -1,7 +1,8 @@
 """Playlist-related Pydantic schemas."""
 
+from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from app.schemas.score import Score
 
@@ -22,9 +23,9 @@ class PlaylistItem(PlaylistItemBase):
     id: int
     playlist_id: int
     score: Optional[Score] = None
-    
-    class Config:
-        orm_mode = True
+    created_at: Optional[datetime] = None
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PlaylistBase(BaseModel):
@@ -42,6 +43,7 @@ class Playlist(PlaylistBase):
     id: int
     user_id: int
     items: List[PlaylistItem] = []
-    
-    class Config:
-        orm_mode = True
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = ConfigDict(from_attributes=True)

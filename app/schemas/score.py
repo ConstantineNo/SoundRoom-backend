@@ -1,7 +1,8 @@
 """Score-related Pydantic schemas."""
 
+from datetime import datetime
 from typing import List, Optional, Dict
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class ScoreBase(BaseModel):
@@ -23,6 +24,15 @@ class ScoreUpdateABC(BaseModel):
     abc_content: str
 
 
+class ScoreUpdateMetadata(BaseModel):
+    """Schema for updating score metadata. All fields optional."""
+    title: Optional[str] = None
+    song_key: Optional[str] = None
+    flute_key: Optional[str] = None
+    fingering: Optional[str] = None
+    tags: Optional[List[str]] = None
+
+
 class Score(ScoreBase):
     """Schema for score response."""
     id: int
@@ -30,6 +40,8 @@ class Score(ScoreBase):
     audio_path: str
     abc_source: Optional[str] = None
     structured_data: Optional[dict] = None
-    
-    class Config:
-        orm_mode = True
+    created_by: Optional[int] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = ConfigDict(from_attributes=True)

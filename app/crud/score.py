@@ -1,14 +1,20 @@
 """Score CRUD operations."""
 
+from datetime import datetime
 from typing import Optional
 from sqlalchemy.orm import Session
 
 from app.models.score import Score
 
 
-def get_scores(db: Session, skip: int = 0, limit: int = 100) -> list[Score]:
-    """Get a list of scores with pagination."""
-    return db.query(Score).offset(skip).limit(limit).all()
+def get_scores(
+    db: Session, skip: int = 0, limit: int = 100
+) -> tuple[list[Score], int]:
+    """Get a list of scores with pagination. Returns (items, total)."""
+    query = db.query(Score)
+    total = query.count()
+    items = query.offset(skip).limit(limit).all()
+    return items, total
 
 
 def get_score(db: Session, score_id: int) -> Score | None:
@@ -24,7 +30,8 @@ def create_score(
     fingering: str,
     image_path: str,
     audio_path: str,
-    tags: Optional[list[str]] = None
+    tags: Optional[list[str]] = None,
+    created_by: Optional[int] = None,
 ) -> Score:
     """Create a new score."""
     db_score = Score(
@@ -34,10 +41,9 @@ def create_score(
         fingering=fingering,
         image_path=image_path,
         audio_path=audio_path,
-        tags=tags or []
+        tags=tags or [],
+        created_by=created_by,
     )
-    db.add(db_score)
-    db.commit()
     db.add(db_score)
     db.commit()
     db.refresh(db_score)
@@ -54,11 +60,51 @@ def update_score_abc(
     score = get_score(db, score_id)
     if not score:
         return None
-        
+
     score.abc_source = abc_source
     score.structured_data = structured_data
-    
+    score.updated_at = datetime.utcnow()
+
     db.add(score)
     db.commit()
     db.refresh(score)
     return score
+
+
+def update_score_metadata(
+    db: Session,
+    score_id: int,
+    title: Optional[str] = None,
+    song_key: Optional[str] = None,
+    flute_key: Optional[str] = None,
+    fingering: Optional[str] = None,
+    tags: Optional[list[str]] = None,
+) -> Score | None:
+    """Update score metadata fields. Only provided fields are updated."""
+    score = get_score(db, score_id)
+    if not score:
+        return None
+    if title is not None:
+        score.title = title
+    if song_key is not None:
+        score.song_key = song_key
+    if flute_key is not None:
+        score.flute_key = flute_key
+    if fingering is not None:
+        score.fingering = fingering
+    if tags is not None:
+        score.tags = tags
+    score.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(score)
+    return score
+
+
+def delete_score(db: Session, score_id: int) -> bool:
+    """Delete a score. Returns True if deleted, False if not found."""
+    score = get_score(db, score_id)
+    if not score:
+        return False
+    db.delete(score)
+    db.commit()
+    return True

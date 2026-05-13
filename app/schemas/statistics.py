@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime, date
 from typing import Optional, Dict, Any
 
@@ -21,8 +21,7 @@ class VisitorLog(VisitorLogBase):
     id: int
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class DailyStatsBase(BaseModel):
     date: date
@@ -33,8 +32,7 @@ class DailyStatsBase(BaseModel):
 class DailyStats(DailyStatsBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class BannedIPBase(BaseModel):
     ip_address: str
@@ -49,8 +47,7 @@ class BannedIP(BannedIPBase):
     id: int
     banned_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class DashboardSummary(BaseModel):
     today_pv: int
@@ -69,5 +66,4 @@ class WhitelistIP(WhitelistIPBase):
     id: int
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
