@@ -1,5 +1,6 @@
 """Score CRUD operations."""
 
+import os
 from datetime import datetime
 from typing import Optional
 from sqlalchemy.orm import Session
@@ -101,10 +102,16 @@ def update_score_metadata(
 
 
 def delete_score(db: Session, score_id: int) -> bool:
-    """Delete a score. Returns True if deleted, False if not found."""
+    """Delete a score and its associated files. Returns True if deleted, False if not found."""
     score = get_score(db, score_id)
     if not score:
         return False
+    image_path = score.image_path
+    audio_path = score.audio_path
     db.delete(score)
     db.commit()
+    if image_path and os.path.exists(image_path):
+        os.remove(image_path)
+    if audio_path and os.path.exists(audio_path):
+        os.remove(audio_path)
     return True

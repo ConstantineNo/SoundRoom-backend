@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 import math
 from fastapi import Query
-from app.core.deps import get_db, get_current_user
+from app.core.deps import get_db, get_current_user, get_current_admin
 from app.core.config import UPLOAD_DIR, ALLOWED_IMAGE_TYPES, ALLOWED_AUDIO_TYPES, MAX_UPLOAD_SIZE
 from app.core.responses import APIResponse, paginated_response
 from app.schemas import Score, ScoreUpdateABC, ScoreUpdateMetadata
@@ -36,6 +36,18 @@ def _validate_file(file: UploadFile, allowed_types: set, max_size: int):
             status_code=400,
             detail=f"File size {size} exceeds maximum allowed {max_size} bytes"
         )
+
+
+def _check_score_ownership(score, current_user) -> None:
+    """Verify the current user owns the score or is an admin.
+
+    Legacy scores (created_by is None) are editable by any authenticated user.
+    Admin users bypass the ownership check.
+    """
+    if current_user.role == "admin":
+        return
+    if score.created_by is not None and score.created_by != current_user.id:
+        raise HTTPException(status_code=403, detail="You do not own this score")
 
 
 def _save_upload(file: UploadFile, prefix: str) -> str:
@@ -154,8 +166,13 @@ def update_score_metadata_endpoint(
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user),
 ):
-    """Update score metadata. Requires authentication."""
-    score = update_score_metadata(
+    """Update score metadata. Requires authentication and ownership (or admin)."""
+    score = get_score(db, score_id)
+    if not score:
+        raise HTTPException(status_code=404, detail="Score not found")
+    _check_score_ownership(score, current_user)
+
+    updated = update_score_metadata(
         db, score_id,
         title=metadata.title,
         song_key=metadata.song_key,
@@ -163,9 +180,7 @@ def update_score_metadata_endpoint(
         fingering=metadata.fingering,
         tags=metadata.tags,
     )
-    if not score:
-        raise HTTPException(status_code=404, detail="Score not found")
-    return score
+    return updated
 
 
 @router.delete("/{score_id}")
@@ -174,8 +189,11 @@ def delete_score_endpoint(
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user),
 ):
-    """Delete a score. Requires authentication."""
-    deleted = delete_score(db, score_id)
-    if not deleted:
+    """Delete a score and its files. Requires authentication and ownership (or admin)."""
+    score = get_score(db, score_id)
+    if not score:
         raise HTTPException(status_code=404, detail="Score not found")
+    _check_score_ownership(score, current_user)
+
+    delete_score(db, score_id)
     return {"message": "Score deleted"}
