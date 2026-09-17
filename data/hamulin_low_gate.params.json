@@ -1,0 +1,14 @@
+{
+  "sample_rate": 22050,
+  "frame_length": 2048,
+  "hop_length": 220,
+  "fmin": 65.406,
+  "fmax": 2093.005,
+  "resolution": 0.1,
+  "voiced_threshold": 0.01,
+  "silence_db": -50.0,
+  "min_note_seconds": 0.08,
+  "pitch_change_cents": 75.0,
+  "stable_seconds": 0.05,
+  "onset_ratio": 2.5
+}

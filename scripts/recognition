@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+mkdir -p .runtime/tmp .runtime/cache .runtime/numba
+export TMPDIR="$PWD/.runtime/tmp"
+export PIP_CACHE_DIR="$PWD/.runtime/cache/pip"
+export NUMBA_CACHE_DIR="$PWD/.runtime/numba"
+export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
+command=${1:-gui}
+if [ "$#" -gt 0 ]; then shift; fi
+case "$command" in
+    gui) exec .venv-recognition/bin/python -m tools.recognition_lab "$@" ;;
+    analyze) exec .venv-recognition/bin/python -m tools.recognition_lab.cli "$@" ;;
+    evaluate) exec .venv-recognition/bin/python -m tools.recognition_lab.evaluate "$@" ;;
+    test) exec .venv-recognition/bin/python -m pytest recognition_tests --confcutdir=recognition_tests --basetemp=".runtime/pytest-$(date +%Y%m%d%H%M%S)" "$@" ;;
+    api) exec .venv-recognition/bin/python -m uvicorn tools.recognition_lab.api:api --host 127.0.0.1 --port 8011 "$@" ;;
+    *) echo 'Usage: scripts/recognition {gui|analyze|evaluate|test|api} [arguments]' >&2; exit 2 ;;
+esac

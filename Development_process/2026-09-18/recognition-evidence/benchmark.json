@@ -1,0 +1,93 @@
+{
+  "hardware": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.12.3",
+    "cpu_count": 10
+  },
+  "audio_seconds": 2.0,
+  "input_sample_rate": 44100,
+  "source": "detuned_44100",
+  "runs": [
+    {
+      "condition": "fresh_process_empty_numba_cache",
+      "wall_seconds": 6.436115832999349,
+      "run": {
+        "engine": "librosa.pyin",
+        "engine_version": "0.11.0",
+        "config": {
+          "sample_rate": 22050,
+          "frame_length": 2048,
+          "hop_length": 220,
+          "fmin": 65.406,
+          "fmax": 2093.005,
+          "resolution": 0.1,
+          "voiced_threshold": 0.1,
+          "silence_db": -50,
+          "min_note_seconds": 0.08,
+          "pitch_change_cents": 75,
+          "stable_seconds": 0.05,
+          "onset_ratio": 2.5
+        },
+        "elapsed_seconds": 6.431008417042904,
+        "real_time_factor": 3.215504208521452,
+        "versions": {
+          "numpy": "2.2.6",
+          "scipy": "1.15.3",
+          "librosa": "0.11.0",
+          "soundfile": "0.13.1",
+          "pydantic": "2.11.7",
+          "soxr": "1.1.0",
+          "numba": "0.67.0"
+        },
+        "reliability_kind": "pYIN voiced_probability; NOT pitch correctness probability",
+        "time_origin": "decoded sample 0; center=True; frame i at i*hop/sample_rate",
+        "boundary_resolution_seconds": 0.009977324263038548,
+        "weights": "none (pYIN statistical algorithm)"
+      },
+      "notes": 2
+    },
+    {
+      "condition": "same_process_warm",
+      "wall_seconds": 0.44927908305544406,
+      "run": {
+        "engine": "librosa.pyin",
+        "engine_version": "0.11.0",
+        "config": {
+          "sample_rate": 22050,
+          "frame_length": 2048,
+          "hop_length": 220,
+          "fmin": 65.406,
+          "fmax": 2093.005,
+          "resolution": 0.1,
+          "voiced_threshold": 0.1,
+          "silence_db": -50,
+          "min_note_seconds": 0.08,
+          "pitch_change_cents": 75,
+          "stable_seconds": 0.05,
+          "onset_ratio": 2.5
+        },
+        "elapsed_seconds": 0.44554487499408424,
+        "real_time_factor": 0.22277243749704212,
+        "versions": {
+          "numpy": "2.2.6",
+          "scipy": "1.15.3",
+          "librosa": "0.11.0",
+          "soundfile": "0.13.1",
+          "pydantic": "2.11.7",
+          "soxr": "1.1.0",
+          "numba": "0.67.0"
+        },
+        "reliability_kind": "pYIN voiced_probability; NOT pitch correctness probability",
+        "time_origin": "decoded sample 0; center=True; frame i at i*hop/sample_rate",
+        "boundary_resolution_seconds": 0.009977324263038548,
+        "weights": "none (pYIN statistical algorithm)"
+      },
+      "notes": 2
+    }
+  ],
+  "process_peak_rss_mib": 416.640625,
+  "memory_semantics": "process-lifetime high-water RSS; includes both analyses and imports",
+  "cold_semantics": "fresh process and empty Numba cache; OS disk caches not flushed; package imports excluded from analysis wall time"
+}

@@ -16,3 +16,6 @@ uploads/
 logs/
 recycle/
 tests/
+# Isolated CHANGE-001 environment and generated evidence
+.venv-recognition/
+.runtime/

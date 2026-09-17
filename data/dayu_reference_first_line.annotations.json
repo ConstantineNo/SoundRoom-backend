@@ -1,0 +1,128 @@
+[
+  {
+    "start_seconds": 1.36,
+    "end_seconds": 1.8145454545454547,
+    "frequency_hz": 493.8833012561241,
+    "label": "谱面近似 低6"
+  },
+  {
+    "start_seconds": 1.8145454545454547,
+    "end_seconds": 2.269090909090909,
+    "frequency_hz": 587.3295358348151,
+    "label": "谱面近似 1"
+  },
+  {
+    "start_seconds": 2.269090909090909,
+    "end_seconds": 2.7236363636363636,
+    "frequency_hz": 587.3295358348151,
+    "label": "谱面近似 1"
+  },
+  {
+    "start_seconds": 2.7236363636363636,
+    "end_seconds": 3.178181818181818,
+    "frequency_hz": 659.2551138257398,
+    "label": "谱面近似 2"
+  },
+  {
+    "start_seconds": 3.178181818181818,
+    "end_seconds": 3.632727272727273,
+    "frequency_hz": 659.2551138257398,
+    "label": "谱面近似 2"
+  },
+  {
+    "start_seconds": 3.632727272727273,
+    "end_seconds": 4.087272727272727,
+    "frequency_hz": 739.9888454232688,
+    "label": "谱面近似 3"
+  },
+  {
+    "start_seconds": 4.087272727272727,
+    "end_seconds": 4.541818181818182,
+    "frequency_hz": 739.9888454232688,
+    "label": "谱面近似 3"
+  },
+  {
+    "start_seconds": 4.541818181818182,
+    "end_seconds": 4.7690909090909095,
+    "frequency_hz": 880.0,
+    "label": "谱面近似 5 [待核]"
+  },
+  {
+    "start_seconds": 4.7690909090909095,
+    "end_seconds": 4.996363636363636,
+    "frequency_hz": 987.7666025122483,
+    "label": "谱面近似 6 [待核]"
+  },
+  {
+    "start_seconds": 4.996363636363636,
+    "end_seconds": 6.36,
+    "frequency_hz": 880.0,
+    "label": "谱面近似 5."
+  },
+  {
+    "start_seconds": 6.36,
+    "end_seconds": 6.8145454545454545,
+    "frequency_hz": 739.9888454232688,
+    "label": "谱面近似 3"
+  },
+  {
+    "start_seconds": 6.8145454545454545,
+    "end_seconds": 7.723636363636364,
+    "frequency_hz": 659.2551138257398,
+    "label": "谱面近似 2"
+  },
+  {
+    "start_seconds": 8.632727272727273,
+    "end_seconds": 9.087272727272728,
+    "frequency_hz": 493.8833012561241,
+    "label": "谱面近似 低6"
+  },
+  {
+    "start_seconds": 9.087272727272728,
+    "end_seconds": 9.541818181818181,
+    "frequency_hz": 587.3295358348151,
+    "label": "谱面近似 1"
+  },
+  {
+    "start_seconds": 9.541818181818181,
+    "end_seconds": 9.996363636363636,
+    "frequency_hz": 587.3295358348151,
+    "label": "谱面近似 1"
+  },
+  {
+    "start_seconds": 9.996363636363636,
+    "end_seconds": 10.450909090909091,
+    "frequency_hz": 659.2551138257398,
+    "label": "谱面近似 2"
+  },
+  {
+    "start_seconds": 10.450909090909091,
+    "end_seconds": 10.905454545454544,
+    "frequency_hz": 659.2551138257398,
+    "label": "谱面近似 2"
+  },
+  {
+    "start_seconds": 10.905454545454544,
+    "end_seconds": 11.36,
+    "frequency_hz": 739.9888454232688,
+    "label": "谱面近似 3"
+  },
+  {
+    "start_seconds": 11.36,
+    "end_seconds": 12.269090909090908,
+    "frequency_hz": 739.9888454232688,
+    "label": "谱面近似 3"
+  },
+  {
+    "start_seconds": 12.269090909090908,
+    "end_seconds": 13.178181818181818,
+    "frequency_hz": 493.8833012561241,
+    "label": "谱面近似 低6"
+  },
+  {
+    "start_seconds": 13.178181818181818,
+    "end_seconds": 14.087272727272726,
+    "frequency_hz": 440.0,
+    "label": "谱面近似 低5"
+  }
+]

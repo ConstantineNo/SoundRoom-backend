@@ -1,0 +1,139 @@
+{
+  "evidence_kind": "user provided video + approximate structural score; ornaments allowed; no accuracy or false-positive verdict",
+  "parts": [
+    {
+      "part": 1,
+      "original_time_offset_seconds": 0,
+      "audio": {
+        "sample_rate": 48000,
+        "samples": 2880000,
+        "channels": 2,
+        "duration_seconds": 60.0,
+        "sha256": "e3eb73c5d13f87e227a104f22049631db5fc12241c85d4055275064a6cc18e52",
+        "peak_amplitude": 0.742950439453125,
+        "clipped_fraction": 0.0,
+        "channel_mix": "arithmetic mean; no normalization"
+      },
+      "run": {
+        "engine": "librosa.pyin",
+        "implementation_version": "soundroom-pyin-segmentation-1.0",
+        "engine_version": "0.11.0",
+        "config": {
+          "sample_rate": 22050,
+          "frame_length": 2048,
+          "hop_length": 220,
+          "fmin": 65.406,
+          "fmax": 2093.005,
+          "resolution": 0.1,
+          "voiced_threshold": 0.1,
+          "silence_db": -50.0,
+          "min_note_seconds": 0.08,
+          "pitch_change_cents": 75.0,
+          "stable_seconds": 0.05,
+          "onset_ratio": 2.5
+        },
+        "elapsed_seconds": 12.78873133403249,
+        "real_time_factor": 0.21314552223387484,
+        "versions": {
+          "numpy": "2.2.6",
+          "scipy": "1.15.3",
+          "librosa": "0.11.0",
+          "soundfile": "0.13.1",
+          "pydantic": "2.11.7",
+          "soxr": "1.1.0",
+          "numba": "0.67.0"
+        },
+        "reliability_kind": "pYIN voiced_probability; NOT pitch correctness probability",
+        "time_origin": "decoded sample 0; center=True; frame i at i*hop/sample_rate",
+        "boundary_resolution_seconds": 0.009977324263038548,
+        "weights": "none (pYIN statistical algorithm)"
+      },
+      "raw_f0_fraction": 0.9509477884935151,
+      "accepted_f0_fraction": 0.8829398071167276,
+      "note_candidate_count": 98,
+      "shorter_than_150ms_candidates": 11,
+      "short_note_interpretation": "includes possible ornaments/transitions; this count is not a false-note count",
+      "warnings": [
+        "stereo_mixed_to_mono; opposite-phase channels may cancel",
+        "some_engine_frames_rejected_by_probability_or_energy_gate",
+        "monophonic_only; out_of_range_pitch_is_not_reliably_detected"
+      ]
+    },
+    {
+      "part": 2,
+      "original_time_offset_seconds": 60,
+      "audio": {
+        "sample_rate": 48000,
+        "samples": 1193472,
+        "channels": 2,
+        "duration_seconds": 24.864,
+        "sha256": "539d4137b61bddba2c11b6bdd350dcfa6809aabcdd9e45e5325432f32294a07f",
+        "peak_amplitude": 0.693634033203125,
+        "clipped_fraction": 0.0,
+        "channel_mix": "arithmetic mean; no normalization"
+      },
+      "run": {
+        "engine": "librosa.pyin",
+        "implementation_version": "soundroom-pyin-segmentation-1.0",
+        "engine_version": "0.11.0",
+        "config": {
+          "sample_rate": 22050,
+          "frame_length": 2048,
+          "hop_length": 220,
+          "fmin": 65.406,
+          "fmax": 2093.005,
+          "resolution": 0.1,
+          "voiced_threshold": 0.1,
+          "silence_db": -50.0,
+          "min_note_seconds": 0.08,
+          "pitch_change_cents": 75.0,
+          "stable_seconds": 0.05,
+          "onset_ratio": 2.5
+        },
+        "elapsed_seconds": 5.636483124922961,
+        "real_time_factor": 0.2266925323730277,
+        "versions": {
+          "numpy": "2.2.6",
+          "scipy": "1.15.3",
+          "librosa": "0.11.0",
+          "soundfile": "0.13.1",
+          "pydantic": "2.11.7",
+          "soxr": "1.1.0",
+          "numba": "0.67.0"
+        },
+        "reliability_kind": "pYIN voiced_probability; NOT pitch correctness probability",
+        "time_origin": "decoded sample 0; center=True; frame i at i*hop/sample_rate",
+        "boundary_resolution_seconds": 0.009977324263038548,
+        "weights": "none (pYIN statistical algorithm)"
+      },
+      "raw_f0_fraction": 0.9755314881668672,
+      "accepted_f0_fraction": 0.9394304051343763,
+      "note_candidate_count": 50,
+      "shorter_than_150ms_candidates": 10,
+      "short_note_interpretation": "includes possible ornaments/transitions; this count is not a false-note count",
+      "warnings": [
+        "stereo_mixed_to_mono; opposite-phase channels may cancel",
+        "some_engine_frames_rejected_by_probability_or_energy_gate",
+        "monophonic_only; out_of_range_pitch_is_not_reliably_detected"
+      ]
+    }
+  ],
+  "seam_check": "55–65 s independently analyzed; low-pitch candidate at original 59.6195–60.3079 s persists without a 60 s cut",
+  "review_regions": [
+    {
+      "start_seconds": 24.1,
+      "end_seconds": 24.4,
+      "observation": "pYIN ~248 Hz; independent harmonic peaks near 498,996,1494 Hz; subharmonic candidate to review"
+    },
+    {
+      "start_seconds": 45.5,
+      "end_seconds": 46.03,
+      "observation": "pYIN ~167 Hz; independent harmonic peaks near 501,999,1500 Hz; subharmonic candidate to review"
+    },
+    {
+      "start_seconds": 59.6,
+      "end_seconds": 60.31,
+      "observation": "pYIN ~374 Hz; mixed spectral components near 759/1110/1503 Hz; not automatically an ornament or an error"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "name": "hamulin — first score line / bars 1–4",
+  "status": "draft_score_reference_not_performance_ground_truth",
+  "audio_file": "hamulin_part1.wav",
+  "audio_sha256": "b58febeff3fc4164ff7f5421924187f2fe7d158176aadac5ab553288c0cc8aba",
+  "key": "1=C",
+  "meter": "4/4",
+  "bpm": 110,
+  "offset_seconds": 0.4,
+  "timing_uncertainty_seconds": 0.1,
+  "interior_margin_seconds": 0.08,
+  "register_assumption": "Unmarked 1 mapped to C5 for this performance; inferred from independent spectral peaks, not absolute octave ground truth",
+  "evidence": "User supplied score image and video red playhead; note ties manually read. Tempo grid is approximate, not annotated performed onsets.",
+  "notes": [
+    {
+      "beat": 0,
+      "duration_beats": 1,
+      "midi": 76,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 1,
+      "duration_beats": 0.5,
+      "midi": 81,
+      "label": "6",
+      "uncertain": false
+    },
+    {
+      "beat": 1.5,
+      "duration_beats": 0.5,
+      "midi": 80,
+      "label": "♯5",
+      "uncertain": false
+    },
+    {
+      "beat": 2,
+      "duration_beats": 0.5,
+      "midi": 80,
+      "label": "5（升号作用域待核）",
+      "uncertain": true
+    },
+    {
+      "beat": 2.5,
+      "duration_beats": 1,
+      "midi": 77,
+      "label": "4",
+      "uncertain": false
+    },
+    {
+      "beat": 3.5,
+      "duration_beats": 2,
+      "midi": 76,
+      "label": "3—3.（延音线合并）",
+      "uncertain": false
+    },
+    {
+      "beat": 5.5,
+      "duration_beats": 1,
+      "midi": 74,
+      "label": "2—2（延音线合并）",
+      "uncertain": false
+    },
+    {
+      "beat": 6.5,
+      "duration_beats": 1.5,
+      "midi": 76,
+      "label": "3—3（延音线合并）",
+      "uncertain": false
+    },
+    {
+      "beat": 8,
+      "duration_beats": 1,
+      "midi": 76,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 9,
+      "duration_beats": 0.5,
+      "midi": 81,
+      "label": "6",
+      "uncertain": false
+    },
+    {
+      "beat": 9.5,
+      "duration_beats": 0.5,
+      "midi": 80,
+      "label": "♯5",
+      "uncertain": false
+    },
+    {
+      "beat": 10,
+      "duration_beats": 0.5,
+      "midi": 80,
+      "label": "5（升号作用域待核）",
+      "uncertain": true
+    },
+    {
+      "beat": 10.5,
+      "duration_beats": 1,
+      "midi": 77,
+      "label": "4",
+      "uncertain": false
+    },
+    {
+      "beat": 11.5,
+      "duration_beats": 0.25,
+      "midi": 76,
+      "label": "3（短音，时刻待核）",
+      "uncertain": true
+    },
+    {
+      "beat": 11.75,
+      "duration_beats": 0.25,
+      "midi": 77,
+      "label": "4（短音，时刻待核）",
+      "uncertain": true
+    },
+    {
+      "beat": 12,
+      "duration_beats": 4,
+      "midi": 76,
+      "label": "3———",
+      "uncertain": false
+    }
+  ]
+}

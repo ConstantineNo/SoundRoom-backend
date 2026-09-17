@@ -1,0 +1,176 @@
+{
+  "name": "dayu / first score line, bars 1–4",
+  "status": "draft_structural_reference_ornaments_allowed",
+  "audio_file": "dayu_part1.wav",
+  "audio_sha256": "e3eb73c5d13f87e227a104f22049631db5fc12241c85d4055275064a6cc18e52",
+  "key": "1=D (inferred; screenshot lacks key)",
+  "meter": "4/4 (inferred from notation)",
+  "bpm": 66.0,
+  "offset_seconds": 1.36,
+  "timing_uncertainty_seconds": 0.25,
+  "interior_margin_seconds": 0.1,
+  "register_assumption": "Unmarked 1 = D5; inferred from video D调作5 label and independent pitch-spectrum checks. No absolute-octave ground truth.",
+  "evidence": "User supplied approximate score, with explicit warning that the performance includes unnotated ornaments. 66 BPM and 1.36 s are coarse working alignment, not score metadata or annotated actual boundaries.",
+  "notes": [
+    {
+      "beat": 0.0,
+      "duration_beats": 0.5,
+      "midi": 71.0,
+      "label": "低6",
+      "uncertain": false
+    },
+    {
+      "beat": 0.5,
+      "duration_beats": 0.5,
+      "midi": 74.0,
+      "label": "1",
+      "uncertain": false
+    },
+    {
+      "beat": 1.0,
+      "duration_beats": 0.5,
+      "midi": 74.0,
+      "label": "1",
+      "uncertain": false
+    },
+    {
+      "beat": 1.5,
+      "duration_beats": 0.5,
+      "midi": 76.0,
+      "label": "2",
+      "uncertain": false
+    },
+    {
+      "beat": 2.0,
+      "duration_beats": 0.5,
+      "midi": 76.0,
+      "label": "2",
+      "uncertain": false
+    },
+    {
+      "beat": 2.5,
+      "duration_beats": 0.5,
+      "midi": 78.0,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 3.0,
+      "duration_beats": 0.5,
+      "midi": 78.0,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 3.5,
+      "duration_beats": 0.25,
+      "midi": 81.0,
+      "label": "5",
+      "uncertain": true
+    },
+    {
+      "beat": 3.75,
+      "duration_beats": 0.25,
+      "midi": 83.0,
+      "label": "6",
+      "uncertain": true
+    },
+    {
+      "beat": 4.0,
+      "duration_beats": 1.5,
+      "midi": 81.0,
+      "label": "5.",
+      "uncertain": false
+    },
+    {
+      "beat": 5.5,
+      "duration_beats": 0.5,
+      "midi": 78.0,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 6.0,
+      "duration_beats": 1.0,
+      "midi": 76.0,
+      "label": "2",
+      "uncertain": false
+    },
+    {
+      "beat": 8.0,
+      "duration_beats": 0.5,
+      "midi": 71.0,
+      "label": "低6",
+      "uncertain": false
+    },
+    {
+      "beat": 8.5,
+      "duration_beats": 0.5,
+      "midi": 74.0,
+      "label": "1",
+      "uncertain": false
+    },
+    {
+      "beat": 9.0,
+      "duration_beats": 0.5,
+      "midi": 74.0,
+      "label": "1",
+      "uncertain": false
+    },
+    {
+      "beat": 9.5,
+      "duration_beats": 0.5,
+      "midi": 76.0,
+      "label": "2",
+      "uncertain": false
+    },
+    {
+      "beat": 10.0,
+      "duration_beats": 0.5,
+      "midi": 76.0,
+      "label": "2",
+      "uncertain": false
+    },
+    {
+      "beat": 10.5,
+      "duration_beats": 0.5,
+      "midi": 78.0,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 11.0,
+      "duration_beats": 1.0,
+      "midi": 78.0,
+      "label": "3",
+      "uncertain": false
+    },
+    {
+      "beat": 12.0,
+      "duration_beats": 1.0,
+      "midi": 71.0,
+      "label": "低6",
+      "uncertain": false
+    },
+    {
+      "beat": 13.0,
+      "duration_beats": 1.0,
+      "midi": 69.0,
+      "label": "低5",
+      "uncertain": false
+    }
+  ],
+  "rests": [
+    {
+      "beat": 7,
+      "duration_beats": 1,
+      "label": "谱面休止（不等于录音静音）"
+    },
+    {
+      "beat": 14,
+      "duration_beats": 2,
+      "label": "谱面连续休止（不等于录音静音）"
+    }
+  ],
+  "comparison_policy": "Structural melody reference only; unnotated ornaments and transitions are not automatically errors."
+}

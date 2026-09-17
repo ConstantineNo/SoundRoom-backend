@@ -86,3 +86,7 @@ def calculate_score(user_freqs: list[float], target_freqs: list[float]) -> dict:
 ## 7. 操作数据规范
 
 - 当需要删除文件时，严禁使用类似rm，等命令，而是mv命令以及类似的方式连带路径移动至recycle文件夹
+
+## CHANGE-001 独立识别工具
+
+本地启动、CLI、隔离测试与结果契约见 [本地识别验证台](Development_process/2026-09-18/本地识别验证台_20260918_0240.md)。通过 `scripts/recognition gui` 打开；识别依赖与旧业务应用分开安装，不使用旧 `tests/` 运行识别测试。

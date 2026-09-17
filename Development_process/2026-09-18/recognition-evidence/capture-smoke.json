@@ -1,0 +1,22 @@
+{
+  "window_visible": true,
+  "steps": [
+    "file_import_and_background_analysis",
+    "selection_and_zoom",
+    "parameter_rerun_and_previous_overlay",
+    "annotation_and_result_exports"
+  ],
+  "devices": "> 0 MacBook Air麦克风, Core Audio (1 in, 0 out)\n< 1 MacBook Air扬声器, Core Audio (0 in, 2 out)\n  2 聚合设备, Core Audio (0 in, 0 out)",
+  "physical_playback": {
+    "active": true,
+    "cursor_seconds": 0.3895011337868481,
+    "error": "",
+    "device_status": ""
+  },
+  "microphone": {
+    "started": true,
+    "error": "",
+    "duration_seconds": 1.9946666666666666,
+    "peak": 0.0
+  }
+}

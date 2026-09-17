@@ -1,0 +1,416 @@
+{
+  "reference_status": "draft_score_reference_not_performance_ground_truth",
+  "interpretation": "Score proximity and gaps only; neither frame pitch accuracy nor note F1. Timing/register and performance deviations are not ground truth.",
+  "scope_seconds": [
+    0.4,
+    9.127272727272727
+  ],
+  "config": {
+    "sample_rate": 22050,
+    "frame_length": 2048,
+    "hop_length": 220,
+    "fmin": 65.406,
+    "fmax": 2093.005,
+    "resolution": 0.1,
+    "voiced_threshold": 0.01,
+    "silence_db": -50.0,
+    "min_note_seconds": 0.08,
+    "pitch_change_cents": 75.0,
+    "stable_seconds": 0.05,
+    "onset_ratio": 2.5
+  },
+  "raw_f0_coverage": 0.8215102974828375,
+  "accepted_f0_coverage": 0.8215102974828375,
+  "rows": [
+    {
+      "label": "3",
+      "uncertain": false,
+      "start_seconds": 0.4,
+      "end_seconds": 0.9454545454545454,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 38,
+      "raw_f0_coverage": 0.9736842105263158,
+      "accepted_f0_coverage": 0.9736842105263158,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 29.989642029834297,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 0.31927437641723355,
+          "end": 0.8580498866213152,
+          "note": "E5"
+        },
+        {
+          "start": 0.8879818594104308,
+          "end": 0.9977324263038548,
+          "note": "A#5"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "uncertain": false,
+      "start_seconds": 0.9454545454545454,
+      "end_seconds": 1.2181818181818183,
+      "score_frequency_hz": 880.0,
+      "interior_frames": 12,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 19.989642029834272,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 0.8879818594104308,
+          "end": 0.9977324263038548,
+          "note": "A#5"
+        },
+        {
+          "start": 0.9977324263038548,
+          "end": 1.4666666666666666,
+          "note": "A5"
+        }
+      ]
+    },
+    {
+      "label": "♯5",
+      "uncertain": false,
+      "start_seconds": 1.2181818181818183,
+      "end_seconds": 1.4909090909090907,
+      "score_frequency_hz": 830.6093951598903,
+      "interior_frames": 11,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 59.98964202983433,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 0.9977324263038548,
+          "end": 1.4666666666666666,
+          "note": "A5"
+        }
+      ]
+    },
+    {
+      "label": "5（升号作用域待核）",
+      "uncertain": true,
+      "start_seconds": 1.4909090909090907,
+      "end_seconds": 1.7636363636363637,
+      "score_frequency_hz": 830.6093951598903,
+      "interior_frames": 11,
+      "raw_f0_coverage": 0.0,
+      "accepted_f0_coverage": 0.0,
+      "raw_within_100c_fraction": null,
+      "accepted_median_delta_cents": null,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 1.7061224489795919,
+          "end": 2.274829931972789,
+          "note": "F5"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "uncertain": false,
+      "start_seconds": 1.7636363636363637,
+      "end_seconds": 2.309090909090909,
+      "score_frequency_hz": 698.4564628660078,
+      "interior_frames": 39,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 29.989642029834297,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 1.7061224489795919,
+          "end": 2.274829931972789,
+          "note": "F5"
+        },
+        {
+          "start": 2.274829931972789,
+          "end": 3.402267573696145,
+          "note": "E5"
+        }
+      ]
+    },
+    {
+      "label": "3—3.（延音线合并）",
+      "uncertain": false,
+      "start_seconds": 2.309090909090909,
+      "end_seconds": 3.4,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 93,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 19.989642029834272,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 2.274829931972789,
+          "end": 3.402267573696145,
+          "note": "E5"
+        }
+      ]
+    },
+    {
+      "label": "2—2（延音线合并）",
+      "uncertain": false,
+      "start_seconds": 3.4,
+      "end_seconds": 3.9454545454545453,
+      "score_frequency_hz": 587.3295358348151,
+      "interior_frames": 39,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 29.989642029834297,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 2.274829931972789,
+          "end": 3.402267573696145,
+          "note": "E5"
+        },
+        {
+          "start": 3.402267573696145,
+          "end": 3.951020408163265,
+          "note": "D5"
+        }
+      ]
+    },
+    {
+      "label": "3—3（延音线合并）",
+      "uncertain": false,
+      "start_seconds": 3.9454545454545453,
+      "end_seconds": 4.763636363636364,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 66,
+      "raw_f0_coverage": 0.9545454545454546,
+      "accepted_f0_coverage": 0.9545454545454546,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 19.989642029834272,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 3.402267573696145,
+          "end": 3.951020408163265,
+          "note": "D5"
+        },
+        {
+          "start": 4.060770975056689,
+          "end": 5.008616780045351,
+          "note": "E5"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "uncertain": false,
+      "start_seconds": 4.763636363636364,
+      "end_seconds": 5.3090909090909095,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 39,
+      "raw_f0_coverage": 0.6410256410256411,
+      "accepted_f0_coverage": 0.6410256410256411,
+      "raw_within_100c_fraction": 0.8,
+      "accepted_median_delta_cents": 19.989642029834272,
+      "overlapping_event_count": 3,
+      "overlapping_events": [
+        {
+          "start": 4.060770975056689,
+          "end": 5.008616780045351,
+          "note": "E5"
+        },
+        {
+          "start": 5.148299319727891,
+          "end": 5.238095238095238,
+          "note": "F5"
+        },
+        {
+          "start": 5.258049886621315,
+          "end": 5.56734693877551,
+          "note": "A5"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "uncertain": false,
+      "start_seconds": 5.3090909090909095,
+      "end_seconds": 5.581818181818182,
+      "score_frequency_hz": 880.0,
+      "interior_frames": 11,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 19.989642029834272,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 5.258049886621315,
+          "end": 5.56734693877551,
+          "note": "A5"
+        },
+        {
+          "start": 5.56734693877551,
+          "end": 5.816780045351474,
+          "note": "G#5"
+        }
+      ]
+    },
+    {
+      "label": "♯5",
+      "uncertain": false,
+      "start_seconds": 5.581818181818182,
+      "end_seconds": 5.8545454545454545,
+      "score_frequency_hz": 830.6093951598903,
+      "interior_frames": 11,
+      "raw_f0_coverage": 1.0,
+      "accepted_f0_coverage": 1.0,
+      "raw_within_100c_fraction": 1.0,
+      "accepted_median_delta_cents": 49.98964202983423,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 5.56734693877551,
+          "end": 5.816780045351474,
+          "note": "G#5"
+        }
+      ]
+    },
+    {
+      "label": "5（升号作用域待核）",
+      "uncertain": true,
+      "start_seconds": 5.8545454545454545,
+      "end_seconds": 6.127272727272728,
+      "score_frequency_hz": 830.6093951598903,
+      "interior_frames": 12,
+      "raw_f0_coverage": 0.0,
+      "accepted_f0_coverage": 0.0,
+      "raw_within_100c_fraction": null,
+      "accepted_median_delta_cents": null,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 6.086167800453515,
+          "end": 6.565079365079365,
+          "note": "F4"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "uncertain": false,
+      "start_seconds": 6.127272727272728,
+      "end_seconds": 6.672727272727273,
+      "score_frequency_hz": 698.4564628660078,
+      "interior_frames": 38,
+      "raw_f0_coverage": 0.9210526315789473,
+      "accepted_f0_coverage": 0.9210526315789473,
+      "raw_within_100c_fraction": 0.0,
+      "accepted_median_delta_cents": -1170.0103579701656,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 6.086167800453515,
+          "end": 6.565079365079365,
+          "note": "F4"
+        },
+        {
+          "start": 6.624943310657597,
+          "end": 6.724716553287982,
+          "note": "E5"
+        }
+      ]
+    },
+    {
+      "label": "3（短音，时刻待核）",
+      "uncertain": true,
+      "start_seconds": 6.672727272727273,
+      "end_seconds": 6.8090909090909095,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 0,
+      "raw_f0_coverage": null,
+      "accepted_f0_coverage": null,
+      "raw_within_100c_fraction": null,
+      "accepted_median_delta_cents": null,
+      "overlapping_event_count": 2,
+      "overlapping_events": [
+        {
+          "start": 6.624943310657597,
+          "end": 6.724716553287982,
+          "note": "E5"
+        },
+        {
+          "start": 6.724716553287982,
+          "end": 6.934240362811791,
+          "note": "F5"
+        }
+      ]
+    },
+    {
+      "label": "4（短音，时刻待核）",
+      "uncertain": true,
+      "start_seconds": 6.8090909090909095,
+      "end_seconds": 6.945454545454546,
+      "score_frequency_hz": 698.4564628660078,
+      "interior_frames": 0,
+      "raw_f0_coverage": null,
+      "accepted_f0_coverage": null,
+      "raw_within_100c_fraction": null,
+      "accepted_median_delta_cents": null,
+      "overlapping_event_count": 1,
+      "overlapping_events": [
+        {
+          "start": 6.724716553287982,
+          "end": 6.934240362811791,
+          "note": "F5"
+        }
+      ]
+    },
+    {
+      "label": "3———",
+      "uncertain": false,
+      "start_seconds": 6.945454545454546,
+      "end_seconds": 9.127272727272727,
+      "score_frequency_hz": 659.2551138257398,
+      "interior_frames": 202,
+      "raw_f0_coverage": 0.7326732673267327,
+      "accepted_f0_coverage": 0.7326732673267327,
+      "raw_within_100c_fraction": 0.527027027027027,
+      "accepted_median_delta_cents": 9.989642029834393,
+      "overlapping_event_count": 5,
+      "overlapping_events": [
+        {
+          "start": 7.004081632653061,
+          "end": 7.722448979591837,
+          "note": "E5"
+        },
+        {
+          "start": 7.822222222222222,
+          "end": 7.912018140589569,
+          "note": "E5"
+        },
+        {
+          "start": 8.151473922902493,
+          "end": 8.540589569160998,
+          "note": "D2"
+        },
+        {
+          "start": 8.560544217687074,
+          "end": 8.650340136054421,
+          "note": "D2"
+        },
+        {
+          "start": 8.770068027210884,
+          "end": 8.989569160997732,
+          "note": "D2"
+        }
+      ]
+    }
+  ]
+}
