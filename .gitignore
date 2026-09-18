@@ -19,3 +19,5 @@ tests/
 # Isolated CHANGE-001 environment and generated evidence
 .venv-recognition/
 .runtime/
+
+private_score_assets/

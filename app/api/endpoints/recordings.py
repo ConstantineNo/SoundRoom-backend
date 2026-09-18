@@ -6,6 +6,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
 
+from app.services.classification import accessible
 from app.core.deps import get_db, get_current_user
 from app.core.config import UPLOAD_DIR, ALLOWED_AUDIO_TYPES, MAX_UPLOAD_SIZE
 from app.schemas import User, Recording
@@ -26,7 +27,7 @@ def upload_recording_endpoint(
     current_user: User = Depends(get_current_user)
 ):
     """Upload a recording for a score. Requires authentication."""
-    score = get_score(db, score_id)
+    score = accessible(db, score_id, current_user.id)
     if not score:
         raise HTTPException(status_code=404, detail="Score not found")
 

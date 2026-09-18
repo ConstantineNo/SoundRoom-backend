@@ -28,3 +28,10 @@ GEOIP_DB_PATH = "app/core/data/GeoLite2-City.mmdb"
 
 # Debug Endpoint
 DEBUG_ENABLED = os.getenv("DIZI_DEBUG_ENABLED", "false").lower() == "true"
+
+# CHANGE-002: documented retry/candidate windows, in seconds.
+CLASSIFICATION_CANDIDATE_TTL = int(os.getenv("CLASSIFICATION_CANDIDATE_TTL", "900"))
+CLASSIFICATION_IDEMPOTENCY_TTL = int(os.getenv("CLASSIFICATION_IDEMPOTENCY_TTL", "86400"))
+
+CLASSIFICATION_ASSET_DIR = os.getenv("CLASSIFICATION_ASSET_DIR", "private_score_assets")
+CLASSIFICATION_MAX_ASSET_SIZE = int(os.getenv("CLASSIFICATION_MAX_ASSET_SIZE", str(20 * 1024 * 1024)))

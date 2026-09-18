@@ -7,15 +7,16 @@ all middleware, routes, and static file serving.
 
 import time
 from fastapi import FastAPI, Request, HTTPException
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.core.database import engine, Base
-from app.api.endpoints import auth, scores, playlists, recordings, debug, admin
+from app.api.endpoints import auth, scores, playlists, recordings, debug, admin, classification, score_assets
 from app.core.middleware import SecurityMiddleware
-from app.core.exceptions import AppException, ERROR_CODES
+from app.core.exceptions import AppException
 from app.core.responses import APIErrorResponse
 from app.core.logging_config import log_request
 from app.models import statistics  # Register statistics models
@@ -47,10 +48,13 @@ app.add_middleware(
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["ETag"],
 )
 
 # Mount static files directory
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+# Legacy files are served only through an authenticated ownership check.
+from app.api.endpoints import private_uploads
+app.include_router(private_uploads.router)
 
 
 # ── Global Exception Handlers ──
@@ -58,17 +62,20 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 @app.exception_handler(AppException)
 async def app_exception_handler(request: Request, exc: AppException):
     return JSONResponse(
-        status_code=_http_status_for_code(exc.code),
+        status_code=getattr(exc, "status_code", _http_status_for_code(exc.code)),
         content=APIErrorResponse(code=exc.code, message=exc.message, detail=exc.detail).model_dump(),
     )
 
 
-@app.exception_handler(HTTPException)
+@app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
     code = _code_from_http_status(exc.status_code)
     return JSONResponse(
         status_code=exc.status_code,
-        content=APIErrorResponse(code=code, message=exc.detail, detail=None).model_dump(),
+        content=APIErrorResponse(code=code, message=str(exc.detail), detail={"reason": {
+            401: "AUTH_REQUIRED", 403: "OWNER_REQUIRED", 404: "NOT_FOUND"
+        }.get(exc.status_code, "INVALID_INPUT")}).model_dump(),
+        headers=exc.headers,
     )
 
 
@@ -76,11 +83,13 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 async def generic_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
-        content=APIErrorResponse(code=90001, message="Internal server error", detail=str(exc)).model_dump(),
+        content=APIErrorResponse(code=90001, message="Internal server error", detail={"reason": "INTERNAL_ERROR"}).model_dump(),
     )
 
 
 def _http_status_for_code(code: int) -> int:
+    if code == 20002:
+        return 409
     prefix = code // 10000
     if prefix == 2:
         return 400
@@ -115,3 +124,16 @@ app.include_router(playlists.router, prefix="/playlists", tags=["playlists"])
 app.include_router(recordings.router, prefix="/recordings", tags=["recordings"])
 app.include_router(debug.router, prefix="/debug", tags=["debug"])
 app.include_router(admin.router, prefix="/admin", tags=["admin"])
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(status_code=422, content={"code": 20001, "message": "请求参数无效",
+        "detail": {"reason": "INVALID_INPUT", "field_errors": [
+            {"path": ".".join(str(p) for p in error["loc"]), "message": error["msg"]}
+            for error in exc.errors()]}})
+
+
+app.include_router(classification.router)
+
+app.include_router(score_assets.router, prefix="/scores")

@@ -1,0 +1,74 @@
+{
+  "fixture_version": 1,
+  "kind": "request_scenario",
+  "not_execution_evidence": true,
+  "data_is_fictional": true,
+  "id": "same-title-editions",
+  "contract_level": "target_edition_not_implemented",
+  "preconditions": [
+    "edition backend migration and DTO implemented",
+    "isolated test account/database"
+  ],
+  "steps": [
+    {
+      "id": "录音室版",
+      "method": "POST",
+      "path": "/scores/",
+      "request_schema": "ScoreCreateWithEdition",
+      "required_headers": [
+        "Authorization",
+        "Idempotency-Key"
+      ],
+      "body": {
+        "title": "示例同名歌曲",
+        "original_key": "D",
+        "fingering": {
+          "code": "closed_2"
+        },
+        "edition": {
+          "label": "录音室版",
+          "original_artist": null,
+          "performer": "示例演唱者",
+          "album": null,
+          "release_date": "2020"
+        }
+      },
+      "expected": {
+        "http_status": 201
+      }
+    },
+    {
+      "id": "现场版",
+      "method": "POST",
+      "path": "/scores/",
+      "request_schema": "ScoreCreateWithEdition",
+      "required_headers": [
+        "Authorization",
+        "Idempotency-Key"
+      ],
+      "body": {
+        "title": "示例同名歌曲",
+        "original_key": "D",
+        "fingering": {
+          "code": "closed_2"
+        },
+        "edition": {
+          "label": "现场版",
+          "original_artist": null,
+          "performer": "示例演唱者",
+          "album": null,
+          "release_date": null
+        }
+      },
+      "expected": {
+        "http_status": 201
+      }
+    }
+  ],
+  "scenario_expectations": [
+    "different score ids despite identical title",
+    "no automatic merge",
+    "edition nulls retained",
+    "release year remains 2020, not 2020-01-01"
+  ]
+}

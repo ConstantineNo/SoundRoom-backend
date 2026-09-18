@@ -1,0 +1,33 @@
+[Unit]
+Description=SoundRoom backend API (test environment)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=20
+
+[Service]
+Type=simple
+User=soundroom
+Group=soundroom
+WorkingDirectory=/opt/soundroom/shared
+EnvironmentFile=/etc/soundroom/backend.env
+Environment=PYTHONPATH=/opt/soundroom/current
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+Environment=TMPDIR=/opt/soundroom/shared/tmp
+Environment=XDG_CACHE_HOME=/opt/soundroom/shared/cache
+Environment=MPLCONFIGDIR=/opt/soundroom/shared/cache/matplotlib
+ExecStart=/opt/soundroom/current/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 18080 --workers 1 --proxy-headers --forwarded-allow-ips=127.0.0.1
+Restart=always
+RestartSec=3
+TimeoutStopSec=30
+UMask=0027
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/soundroom/shared
+PrivateDevices=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

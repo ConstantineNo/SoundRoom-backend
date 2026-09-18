@@ -1,0 +1,81 @@
+{
+  "fixture_version": 1,
+  "kind": "request_scenario",
+  "not_execution_evidence": true,
+  "data_is_fictional": true,
+  "id": "edition-patch",
+  "contract_level": "target_edition_not_implemented",
+  "preconditions": [
+    "edition backend implemented",
+    "existing own score and fresh ETag for each independent case"
+  ],
+  "steps": [
+    {
+      "id": "album-only",
+      "method": "PATCH",
+      "path": "/scores/{score_id}",
+      "request_schema": "ScorePatchWithEdition",
+      "required_headers": [
+        "Authorization",
+        "If-Match"
+      ],
+      "body": {
+        "edition": {
+          "album": "示例专辑"
+        }
+      },
+      "expected": {
+        "http_status": 200,
+        "preserve_other_edition_fields": true
+      }
+    },
+    {
+      "id": "clear-date",
+      "method": "PATCH",
+      "path": "/scores/{score_id}",
+      "request_schema": "ScorePatchWithEdition",
+      "required_headers": [
+        "Authorization",
+        "If-Match"
+      ],
+      "body": {
+        "edition": {
+          "release_date": null
+        }
+      },
+      "expected": {
+        "http_status": 200
+      }
+    },
+    {
+      "id": "clear-all",
+      "method": "PATCH",
+      "path": "/scores/{score_id}",
+      "request_schema": "ScorePatchWithEdition",
+      "required_headers": [
+        "Authorization",
+        "If-Match"
+      ],
+      "body": {
+        "edition": null
+      },
+      "expected": {
+        "http_status": 200
+      }
+    }
+  ],
+  "date_examples": {
+    "valid": [
+      "2020",
+      "2020-02",
+      "2020-02-29",
+      null
+    ],
+    "invalid": [
+      "2023-02-29",
+      "2020-13",
+      "2020-2",
+      "2020-01-01T00:00:00Z"
+    ]
+  }
+}

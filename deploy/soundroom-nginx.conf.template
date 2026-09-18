@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name __SERVER_NAME__;
+    client_max_body_size 51m;
+    # Nginx upload buffers remain inside the persistent service workspace.
+    client_body_temp_path /opt/soundroom/shared/nginx_body;
+    proxy_temp_path /opt/soundroom/shared/nginx_proxy;
+
+    # Support both direct backend URLs and the frontend /api prefix.
+    location /api/ {
+        proxy_pass http://127.0.0.1:18080/;
+        include /etc/nginx/soundroom-proxy.conf;
+    }
+    location / {
+        proxy_pass http://127.0.0.1:18080;
+        include /etc/nginx/soundroom-proxy.conf;
+    }
+}

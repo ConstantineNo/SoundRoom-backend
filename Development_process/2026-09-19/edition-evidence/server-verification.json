@@ -1,0 +1,39 @@
+{
+  "release": "20260918T223427Z-c9c5b0125900",
+  "source_sha256": "c9c5b0125900b52691abbc1535e1da93cad3b08c8245dc95788e7955ef383c07",
+  "archive_sha256": "725b736785468f0516f9dbd2df2346070559d7f2b9878815e9f0407a8386ad1d",
+  "verified_files": 79,
+  "backup": "/opt/soundroom/shared/backups/before-20260918T223710Z.db",
+  "previous_revision": "c2a20260918",
+  "revision": "c2b20260919",
+  "integrity": "ok",
+  "preservation": {
+    "users": {
+      "existing_rows": 8,
+      "all_original_fields_preserved": true
+    },
+    "scores": {
+      "existing_rows": 14,
+      "all_original_fields_preserved": true
+    },
+    "score_arrangements": {
+      "existing_rows": 14,
+      "all_original_fields_preserved": true
+    },
+    "score_sections": {
+      "existing_rows": 18,
+      "all_original_fields_preserved": true
+    },
+    "score_assets": {
+      "existing_rows": 6,
+      "all_original_fields_preserved": true
+    }
+  },
+  "old_editions_all_null": true,
+  "services_enabled": [
+    "soundroom-backend",
+    "nginx"
+  ],
+  "docs_baseline": "27dd2a5",
+  "verified_date_jst": "2026-09-19"
+}

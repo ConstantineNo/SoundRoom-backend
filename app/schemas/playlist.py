@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel, ConfigDict
 
-from app.schemas.score import Score
+from app.schemas.classification import ScoreSummary
 
 
 class PlaylistItemBase(BaseModel):
@@ -22,7 +22,7 @@ class PlaylistItem(PlaylistItemBase):
     """Schema for playlist item response."""
     id: int
     playlist_id: int
-    score: Optional[Score] = None
+    score: Optional[ScoreSummary] = None
     created_at: Optional[datetime] = None
 
     model_config = ConfigDict(from_attributes=True)

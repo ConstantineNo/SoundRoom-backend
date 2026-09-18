@@ -6,3 +6,5 @@ from app.models.recording import Recording
 from app.models.statistics import VisitorLog, DailyStats, BannedIP, WhitelistIP
 
 __all__ = ["User", "Score", "Playlist", "PlaylistItem", "Recording", "VisitorLog", "DailyStats", "BannedIP", "WhitelistIP"]
+
+from app.models.classification import Arrangement, Section, IdempotencyRecord, ScoreAsset

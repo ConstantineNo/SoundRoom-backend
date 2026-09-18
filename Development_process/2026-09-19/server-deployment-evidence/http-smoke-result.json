@@ -1,0 +1,1 @@
+{"passed": true, "base_url": "http://163.192.34.11/api", "score_id": 2, "checks": ["health", "dictionary", "openapi", "register/login", "candidate confirmation", "private create/read", "idempotency replay", "categories/whole match", "428/412", "CORS/ETag", "private asset upload/download", "practice not available"]}

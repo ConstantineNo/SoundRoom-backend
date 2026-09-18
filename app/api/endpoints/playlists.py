@@ -4,6 +4,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
+from app.services.classification import accessible, summary
 from app.core.deps import get_db, get_current_user
 from app.schemas import User, Playlist, PlaylistCreate, PlaylistItem
 from app.crud import (
@@ -26,7 +27,7 @@ def create_playlist_endpoint(
     current_user: User = Depends(get_current_user)
 ):
     """Create a new playlist."""
-    return create_playlist(db, playlist.name, current_user.id)
+    return playlist_view(create_playlist(db, playlist.name, current_user.id), current_user.id)
 
 
 @router.get("/", response_model=List[Playlist])
@@ -35,7 +36,7 @@ def read_playlists_endpoint(
     current_user: User = Depends(get_current_user)
 ):
     """Get all playlists for the current user."""
-    return get_playlists_by_user(db, current_user.id)
+    return [playlist_view(p, current_user.id) for p in get_playlists_by_user(db, current_user.id)]
 
 
 @router.put("/{playlist_id}", response_model=Playlist)
@@ -49,7 +50,7 @@ def rename_playlist_endpoint(
     playlist = update_playlist(db, playlist_id, current_user.id, name)
     if not playlist:
         raise HTTPException(status_code=404, detail="Playlist not found")
-    return playlist
+    return playlist_view(playlist, current_user.id)
 
 
 @router.delete("/{playlist_id}")
@@ -77,12 +78,12 @@ def add_item_to_playlist_endpoint(
     if not playlist:
         raise HTTPException(status_code=404, detail="Playlist not found")
 
-    score = get_score(db, score_id)
+    score = accessible(db, score_id, current_user.id)
     if not score:
         raise HTTPException(status_code=404, detail="Score not found")
 
     try:
-        return create_playlist_item(db, playlist_id, score_id)
+        return item_view(create_playlist_item(db, playlist_id, score_id), current_user.id)
     except DuplicatePlaylistItemError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -121,4 +122,18 @@ def reorder_playlist_item_endpoint(
     item = update_playlist_item_sort(db, item_id, playlist_id, sort_order)
     if not item:
         raise HTTPException(status_code=404, detail="Playlist item not found")
-    return item
+    return item_view(item, current_user.id)
+
+
+def item_view(item, user_id: int) -> dict:
+    score = item.score
+    visible = score and (score.created_by == user_id or score.visibility == "public")
+    return {"id": item.id, "playlist_id": item.playlist_id, "score_id": item.score_id,
+            "sort_order": item.sort_order, "created_at": item.created_at,
+            "score": summary(score) if visible else None}
+
+
+def playlist_view(playlist, user_id: int) -> dict:
+    return {"id": playlist.id, "name": playlist.name, "user_id": playlist.user_id,
+            "created_at": playlist.created_at, "updated_at": playlist.updated_at,
+            "items": [item_view(item, user_id) for item in playlist.items]}

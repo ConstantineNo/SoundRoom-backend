@@ -37,7 +37,7 @@ async def get_current_user(
     Raises HTTP 401 if token is invalid or user not found.
     """
     from app.models.user import User  # Import here to avoid circular dependency
-    
+
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -46,15 +46,15 @@ async def get_current_user(
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
+        if username is None or payload.get("purpose") is not None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    
+
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise credentials_exception
-        
+
     return user
 
 async def get_current_admin(
@@ -69,3 +69,12 @@ async def get_current_admin(
             detail="The user doesn't have enough privileges"
         )
     return current_user
+
+
+optional_oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login", auto_error=False)
+
+
+async def get_optional_user(token: str | None = Depends(optional_oauth2_scheme), db: Session = Depends(get_db)):
+    if token is None:
+        return None
+    return await get_current_user(token, db)

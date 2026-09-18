@@ -1,0 +1,20 @@
+{
+  "release": "20260918T190656Z-1be6d8386e85",
+  "source_sha256": "1be6d8386e85868c98bc300869aa9ca295f27326d525b223397f612a81e92fdd",
+  "archive_sha256": "7d87be180c89753f6e2a8b58beaf5d6f7ae0880d9f3e31a4aa0f9ce338c1d2ad",
+  "manifest_files_verified": 74,
+  "database_revision": "c2a20260918",
+  "sqlite_integrity": "ok",
+  "services_enabled": [
+    "soundroom-backend",
+    "nginx"
+  ],
+  "backend_state": {
+    "NRestarts": 1,
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "host": "163.192.34.11",
+  "verified_date_jst": "2026-09-19",
+  "whole_server_reboot_tested": false
+}
