@@ -86,3 +86,8 @@ def calculate_score(user_freqs: list[float], target_freqs: list[float]) -> dict:
 ## 7. 操作数据规范
 
 - 当需要删除文件时，严禁使用类似rm，等命令，而是mv命令以及类似的方式连带路径移动至recycle文件夹
+
+
+## 组件版本
+
+根 `VERSION` 为唯一组件版本来源。GitHub push 由 Actions 自动刷新，禁止手工修改或跳过 CI；推送后拉取机器人提交。接入与验证见 [组件版本 CI](Development_process/2026-09-19/组件版本CI_20260919_1600.md)。

@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.core.database import engine, Base
+from app.core.component_version import read_version
 from app.api.endpoints import auth, scores, playlists, recordings, debug, admin
 from app.core.middleware import SecurityMiddleware
 from app.core.exceptions import AppException, ERROR_CODES
@@ -23,7 +24,7 @@ from app.models import statistics  # Register statistics models
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Bamboo Flute Practice Platform")
+app = FastAPI(title="Bamboo Flute Practice Platform", version=read_version())
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
