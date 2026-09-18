@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
 INCLUDE = ('app', 'migrations', 'classification_tests', 'deploy', 'scripts/deployment',
-           'alembic.ini', 'requirements.txt', 'requirements-test.txt')
+           'alembic.ini', 'requirements.txt', 'requirements-test.txt', 'VERSION')
 EXCLUDE = ('app/services/audio_recognition/', 'app/schemas/audio_recognition.py',
            'app/schemas/polyphonic_recognition.py')
 
